@@ -27,6 +27,7 @@ public class User {
 
     private String idUser;
     private String password;
+    private boolean deleted;
 
     @OneToMany
     private List<Task> taskList;

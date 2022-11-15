@@ -1,9 +1,12 @@
 package com.mammadli.to_do_app.services;
 
 import com.mammadli.to_do_app.db.entity.User;
+import com.mammadli.to_do_app.util.ResponseData;
 
 public interface UserServices {
-    User createUser(User user);
+    ResponseData<User> createUser(User user);
 
-    User getUser(String idUser);
+    ResponseData<User> getUser(String idUser);
+
+    ResponseData<String> deleteUser(String idUser);
 }
