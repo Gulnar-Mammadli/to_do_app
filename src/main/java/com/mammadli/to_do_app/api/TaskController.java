@@ -11,8 +11,8 @@ import java.util.List;
 
 
 @RequiredArgsConstructor
-@RestController
-@RequestMapping("/api/v1/tasks")
+@RequestMapping
+@RestController("/api/v1/tasks")
 public class TaskController {
 
     private final TaskServices taskServices;
@@ -33,10 +33,10 @@ public class TaskController {
         return ResponseEntity.ok(taskServices.getAllTasks(idUser));
     }
 
-    @DeleteMapping("/{idUser}/{id}")
-    ResponseEntity<ResponseData<String>> deleteTask(@PathVariable String idUser,@PathVariable String id){
-        return ResponseEntity.ok(taskServices.deleteTask(idUser, id));
-    }
+//    @DeleteMapping("/{idUser}/{id}")
+//    ResponseEntity<ResponseData<String>> deleteTask(@PathVariable String idUser,@PathVariable String id){
+//        return ResponseEntity.ok(taskServices.deleteTask(idUser, id));
+//    }
 
 
 }

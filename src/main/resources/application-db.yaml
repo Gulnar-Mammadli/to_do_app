@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_SCHEMA:TASKS}?createDatabaseIfNotExist=true
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_SCHEMA:TO_DO_APP}?createDatabaseIfNotExist=true
     username: ${DB_USER:root}
     password: ${DB_PASSWORD:123456}
     tomcat:

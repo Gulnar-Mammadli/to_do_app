@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/users")
+@RequestMapping
+@RestController("/api/v1/users")
 public class UserController {
 
     private final UserServices userServices;

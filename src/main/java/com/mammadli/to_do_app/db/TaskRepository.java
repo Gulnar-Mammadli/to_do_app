@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends CrudRepository<Task,String> {
 
-    Task findByIdUser(String IdUser, String id);
+//    Task findByIdUser(String IdUser, String id);
     List<Task> findAllByIdUser(String idUser);
 
 
