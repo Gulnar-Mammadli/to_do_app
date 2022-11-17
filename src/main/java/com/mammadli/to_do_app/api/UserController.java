@@ -8,23 +8,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RequestMapping
-@RestController("/api/v1/users")
+@RestController
+@RequestMapping("/api/v1/users")
 public class UserController {
 
     private final UserServices userServices;
 
-    @PostMapping
+    @PostMapping("/create")
     ResponseEntity<ResponseData<User>> createUser(@RequestBody User user){
         return ResponseEntity.ok(userServices.createUser(user));
     }
 
-    @GetMapping("/{idUser}")
+//    TODO
+//    create Put method to update the user information
+    @GetMapping("/get/{idUser}")
     ResponseEntity<ResponseData<User>> getUser(@PathVariable String idUser){
         return ResponseEntity.ok(userServices.getUser(idUser));
     }
 
-    @DeleteMapping("/{idUser}")
+    @DeleteMapping("/delete/{idUser}")
     ResponseEntity<ResponseData<String>> deleteUser(@PathVariable String idUser){
        return ResponseEntity.ok(userServices.deleteUser(idUser));
     }

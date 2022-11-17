@@ -34,7 +34,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public ResponseData<User> getUser(String idUser) {
-        User user = userRepository.findByIdUser(idUser);
+        User user = userRepository.findByIdUserAndDeletedIsFalse(idUser);
         if(user!=null){
             return GenerateResponseUtility.userFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,user);
         }
@@ -43,9 +43,10 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public ResponseData<String> deleteUser(String idUser) {
-        User user = userRepository.findByIdUser(idUser);
+        User user = userRepository.findByIdUserAndDeletedIsFalse(idUser);
         if(user != null){
             user.setDeleted(true);
+            User save = userRepository.save(user);
             return GenerateResponseUtility.func.generate(SUCCESS_CODE,SUCCESS_MESSAGE,null );
         }
         return GenerateResponseUtility.func.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);

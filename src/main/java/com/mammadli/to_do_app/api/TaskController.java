@@ -11,19 +11,19 @@ import java.util.List;
 
 
 @RequiredArgsConstructor
-@RequestMapping
-@RestController("/api/v1/tasks")
+@RestController
+@RequestMapping("/api/v1/tasks")
 public class TaskController {
 
     private final TaskServices taskServices;
 
 
-    @PostMapping("/{idUser}")
+    @PostMapping("/add/{idUser}")
     ResponseEntity<ResponseData<Task>> addTask(@PathVariable String idUser, @RequestBody Task task){
         return ResponseEntity.ok(taskServices.addTask(idUser,task));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     ResponseEntity<ResponseData<Task>> updateTask(@RequestBody Task task, @PathVariable String id){
         return ResponseEntity.ok(taskServices.updateTask(id));
     }
