@@ -19,8 +19,11 @@ public class UserController {
         return ResponseEntity.ok(userServices.createUser(user));
     }
 
-//    TODO
-//    create Put method to update the user information
+    @PutMapping("/update")
+    ResponseEntity<ResponseData<User>> updateUser(@RequestBody User user){
+        return ResponseEntity.ok(userServices.updateUser(user));
+    }
+
     @GetMapping("/get/{idUser}")
     ResponseEntity<ResponseData<User>> getUser(@PathVariable String idUser){
         return ResponseEntity.ok(userServices.getUser(idUser));

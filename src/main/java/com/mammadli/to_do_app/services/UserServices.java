@@ -9,4 +9,6 @@ public interface UserServices {
     ResponseData<User> getUser(String idUser);
 
     ResponseData<String> deleteUser(String idUser);
+
+    ResponseData<User> updateUser(User user);
 }
