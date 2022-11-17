@@ -36,7 +36,7 @@ public class UserServicesImpl implements UserServices {
     public ResponseData<User> updateUser(User user) {
         User response = userRepository.findByIdUserAndDeletedIsFalse(user.getIdUser());
         if(response!=null){
-            User updated = userRepository.save(response);
+            User updated = userRepository.save(user);
             return GenerateResponseUtility.userFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,updated);
         }
         return GenerateResponseUtility.userFunc.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
