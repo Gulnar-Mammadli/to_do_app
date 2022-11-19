@@ -13,5 +13,5 @@ public interface TaskServices {
 
     ResponseData<List<Task>> getAllTasks(String idUser);
 
-//    ResponseData<String> deleteTask(String idUser, String id);
+    ResponseData<String> deleteTask(String idUser, String id);
 }

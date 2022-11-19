@@ -34,10 +34,10 @@ public class TaskController {
         return ResponseEntity.ok(taskServices.getAllTasks(idUser));
     }
 
-//    @DeleteMapping("/{idUser}/{id}")
-//    ResponseEntity<ResponseData<String>> deleteTask(@PathVariable String idUser,@PathVariable String id){
-//        return ResponseEntity.ok(taskServices.deleteTask(idUser, id));
-//    }
+    @DeleteMapping("/{idUser}/{id}")
+    ResponseEntity<ResponseData<String>> deleteTask(@PathVariable String idUser,@PathVariable String id){
+        return ResponseEntity.ok(taskServices.deleteTask(idUser, id));
+    }
 
 
 }

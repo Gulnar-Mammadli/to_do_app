@@ -29,6 +29,7 @@ public class TaskServicesImpl implements TaskServices {
     public ResponseData<Task> addTask(Task task) {
         User user = userRepository.findByIdUser(task.getIdUser());
         if(user != null){
+            task.setTaskStatus(TaskStatus.CREATED);
             Task new_task = taskRepository.save(task);
             return GenerateResponseUtility.taskFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,new_task);
         }
@@ -49,13 +50,14 @@ public class TaskServicesImpl implements TaskServices {
         return GenerateResponseUtility.tasksFunc.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
     }
 
-//    @Override
-//    public ResponseData<String> deleteTask(String idUser, String id) {
-//        Task task = taskRepository.findByIdUser(idUser, id);
-//        if(task!=null){
-//            task.setTaskStatus(TaskStatus.DELETED);
-//            return GenerateResponseUtility.func.generate(SUCCESS_CODE,SUCCESS_MESSAGE,null);
-//        }
-//        return GenerateResponseUtility.func.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
-//    }
+    @Override
+    public ResponseData<String> deleteTask(String idUser, String id) {
+        Task task = taskRepository.findByIdUserAndId(idUser, id);
+        if(task!=null){
+            task.setTaskStatus(TaskStatus.DELETED);
+            taskRepository.save(task);
+            return GenerateResponseUtility.func.generate(SUCCESS_CODE,SUCCESS_MESSAGE,null);
+        }
+        return GenerateResponseUtility.func.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
+    }
 }
