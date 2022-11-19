@@ -18,11 +18,12 @@ public class TaskController {
     private final TaskServices taskServices;
 
 
-    @PostMapping("/add/{idUser}")
-    ResponseEntity<ResponseData<Task>> addTask(@PathVariable String idUser, @RequestBody Task task){
-        return ResponseEntity.ok(taskServices.addTask(idUser,task));
+    @PostMapping("/add")
+    ResponseEntity<ResponseData<Task>> addTask( @RequestBody Task task){
+        return ResponseEntity.ok(taskServices.addTask(task));
     }
 
+//    TODO update this method
     @PutMapping("/update/{id}")
     ResponseEntity<ResponseData<Task>> updateTask(@RequestBody Task task, @PathVariable String id){
         return ResponseEntity.ok(taskServices.updateTask(id));

@@ -26,8 +26,8 @@ public class TaskServicesImpl implements TaskServices {
     public static String ALREADY_EXIST_MESSAGE = "ALREADY EXIST";
 
     @Override
-    public ResponseData<Task> addTask(String idUser, Task task) {
-        User user = userRepository.findByIdUser(idUser);
+    public ResponseData<Task> addTask(Task task) {
+        User user = userRepository.findByIdUser(task.getIdUser());
         if(user != null){
             Task new_task = taskRepository.save(task);
             return GenerateResponseUtility.taskFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,new_task);

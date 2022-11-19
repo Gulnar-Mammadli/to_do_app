@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TaskServices {
 
-    ResponseData<Task> addTask(String idUser, Task task);
+    ResponseData<Task> addTask(Task task);
 
     ResponseData<Task> updateTask(String id);
 
