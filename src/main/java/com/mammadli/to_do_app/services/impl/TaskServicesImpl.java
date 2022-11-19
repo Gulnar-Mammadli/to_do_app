@@ -43,7 +43,7 @@ public class TaskServicesImpl implements TaskServices {
 
     @Override
     public ResponseData<List<Task>> getAllTasks(String idUser) {
-        List<Task> tasks = taskRepository.findAllByIdUser(idUser);
+        List<Task> tasks = taskRepository.findAllByIdUserAndTaskStatus(idUser, TaskStatus.CREATED);
         if(!tasks.isEmpty()){
             return GenerateResponseUtility.tasksFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,tasks);
         }
