@@ -37,8 +37,19 @@ public class TaskServicesImpl implements TaskServices {
     }
 
     @Override
-    public ResponseData<Task> updateTask(String id) {
-        return null;
+    public ResponseData<Task> updateTask(Task task) {
+        User user = userRepository.findByIdUserAndDeletedIsFalse(task.getIdUser());
+        if(user!=null){
+            Task response = taskRepository.findByIdUserAndIdAndTaskStatus(task.getIdUser(), task.getId(),TaskStatus.CREATED);
+            if(response!=null){
+            Task updated = taskRepository.save(task);
+            return GenerateResponseUtility.taskFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,updated);}
+            else{
+                return GenerateResponseUtility.taskFunc.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
+            }
+
+        }
+        return GenerateResponseUtility.taskFunc.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
     }
 
     @Override

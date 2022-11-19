@@ -24,9 +24,9 @@ public class TaskController {
     }
 
 //    TODO update this method
-    @PutMapping("/update/{id}")
-    ResponseEntity<ResponseData<Task>> updateTask(@RequestBody Task task, @PathVariable String id){
-        return ResponseEntity.ok(taskServices.updateTask(id));
+    @PutMapping("/update/")
+    ResponseEntity<ResponseData<Task>> updateTask(@RequestBody Task task){
+        return ResponseEntity.ok(taskServices.updateTask(task));
     }
 
     @GetMapping("/get-list/{idUser}")

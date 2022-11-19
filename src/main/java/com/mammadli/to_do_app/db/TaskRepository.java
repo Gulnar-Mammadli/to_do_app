@@ -11,6 +11,7 @@ import java.util.List;
 public interface TaskRepository extends CrudRepository<Task,String> {
 
     Task findByIdUserAndId(String IdUser, String id);
+    Task findByIdUserAndIdAndTaskStatus(String idUser, String id, TaskStatus taskStatus);
     List<Task> findAllByIdUserAndTaskStatus(String idUser, TaskStatus taskStatus);
 
 

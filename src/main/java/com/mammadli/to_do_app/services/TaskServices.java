@@ -9,7 +9,7 @@ public interface TaskServices {
 
     ResponseData<Task> addTask(Task task);
 
-    ResponseData<Task> updateTask(String id);
+    ResponseData<Task> updateTask(Task task);
 
     ResponseData<List<Task>> getAllTasks(String idUser);
 
