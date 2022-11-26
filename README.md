@@ -4,7 +4,7 @@ For now I have written necessary RESTFUL APIs for back end. I have set up Swagge
 The planned next steps:
 1. Work on front end side: create simple web page for my app. I will be using vue.js
 2. Connect frontend and backend
-3. Consigure security
+3. Configure security
 4. Testing
 5. Kubernetes
 6. Sonarqube
