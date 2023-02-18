@@ -1,14 +1,18 @@
 package com.mammadli.to_do_app.services;
 
-import com.mammadli.to_do_app.db.entity.User;
+import com.mammadli.to_do_app.model.dto.RegistrationRequest;
+import com.mammadli.to_do_app.model.dto.UpdateRequest;
+import com.mammadli.to_do_app.model.entity.User;
 import com.mammadli.to_do_app.util.ResponseData;
 
 public interface UserServices {
-    ResponseData<User> createUser(User user);
+    User createUser(RegistrationRequest request);
 
-    ResponseData<User> getUser(String idUser);
+    User updateUser(UpdateRequest request,String id);
 
-    ResponseData<String> deleteUser(String idUser);
+    User getUser(String idUser);
 
-    ResponseData<User> updateUser(User user);
+    Void deleteUser(String idUser);
+
+    User registerUser(RegistrationRequest request);
 }

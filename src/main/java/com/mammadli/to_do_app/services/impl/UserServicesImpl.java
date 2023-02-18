@@ -1,65 +1,70 @@
 package com.mammadli.to_do_app.services.impl;
 
-import com.mammadli.to_do_app.db.UserRepository;
-import com.mammadli.to_do_app.db.entity.User;
+import com.mammadli.to_do_app.enums.Role;
+import com.mammadli.to_do_app.mapper.UserMapper;
+import com.mammadli.to_do_app.model.UserRepository;
+import com.mammadli.to_do_app.model.dto.RegistrationRequest;
+import com.mammadli.to_do_app.model.dto.UpdateRequest;
+import com.mammadli.to_do_app.model.entity.User;
 import com.mammadli.to_do_app.services.UserServices;
-import com.mammadli.to_do_app.util.GenerateResponseUtility;
-import com.mammadli.to_do_app.util.ResponseData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserServicesImpl implements UserServices {
-
-    public static int SUCCESS_CODE = 200;
-    public static int ALREADY_EXIST_CODE = 409;
-    public static int NOT_FOUND_CODE = 404;
-    public static String SUCCESS_MESSAGE = "SUCCESS";
-    public static String NOT_FOUND_MESSAGE = "NOT_FOUND";
-    public static String ALREADY_EXIST_MESSAGE = "ALREADY EXIST";
-
     private final UserRepository userRepository;
 
     @Override
-    public ResponseData<User> createUser(User user) {
-        User response = userRepository.findByIdUser(user.getIdUser());
-        if(response==null){
-            User newUser = userRepository.save(user);
-            return GenerateResponseUtility.userFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,newUser);
+    public User registerUser(RegistrationRequest request) {
 
-        }
-        return GenerateResponseUtility.userFunc.generate(ALREADY_EXIST_CODE,ALREADY_EXIST_MESSAGE,null);
+        User user = UserMapper.INSTANCE.mapToUser(request);
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
+        user.setRole(Role.ADMIN);
+        return userRepository.save(user);
     }
 
     @Override
-    public ResponseData<User> updateUser(User user) {
-        User response = userRepository.findByIdUserAndDeletedIsFalse(user.getIdUser());
-        if(response!=null){
-            User updated = userRepository.save(user);
-            return GenerateResponseUtility.userFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,updated);
+    public User createUser(RegistrationRequest request) {
+        User response = userRepository.findByUsername(request.getUsername());
+        if (response != null) {
+            request.setRole(Role.USER);
+            request.setPassword(request.getPassword());
+            return userRepository.save(UserMapper.INSTANCE.mapToUser(request));
         }
-        return GenerateResponseUtility.userFunc.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
+        return null;
     }
 
     @Override
-    public ResponseData<User> getUser(String idUser) {
+    public User updateUser(UpdateRequest request, String id) {
+        User response = userRepository.findByIdUser(id);
+        if (response != null) {
+            User user = UserMapper.INSTANCE.fromUpdateRequest(request);
+            user.setIdUser(id);
+            return userRepository.save(user);
+        }
+        return null;
+    }
+
+    @Override
+    public User getUser(String idUser) {
         User user = userRepository.findByIdUserAndDeletedIsFalse(idUser);
-        if(user!=null){
-            return GenerateResponseUtility.userFunc.generate(SUCCESS_CODE,SUCCESS_MESSAGE,user);
+        if (user != null) {
+            return user;
         }
-        return GenerateResponseUtility.userFunc.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
+        return null;
     }
 
     @Override
-    public ResponseData<String> deleteUser(String idUser) {
+    public Void deleteUser(String idUser) {
         User user = userRepository.findByIdUserAndDeletedIsFalse(idUser);
-        if(user != null){
-            user.setDeleted(true);
-            User save = userRepository.save(user);
-            return GenerateResponseUtility.func.generate(SUCCESS_CODE,SUCCESS_MESSAGE,null );
+        if (user != null) {
+            userRepository.deleteById(idUser);
+            userRepository.save(user);
         }
-        return GenerateResponseUtility.func.generate(NOT_FOUND_CODE,NOT_FOUND_MESSAGE,null);
+        return null;
     }
 
 }
