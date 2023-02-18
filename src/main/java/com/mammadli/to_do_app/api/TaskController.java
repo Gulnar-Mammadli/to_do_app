@@ -3,9 +3,7 @@ package com.mammadli.to_do_app.api;
 import com.mammadli.to_do_app.model.dto.TaskRequest;
 import com.mammadli.to_do_app.model.entity.Task;
 import com.mammadli.to_do_app.services.TaskServices;
-import com.mammadli.to_do_app.util.ResponseData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,10 +23,9 @@ public class TaskController {
         return taskServices.addTask(request);
     }
 
-    //    TODO update this method
     @PutMapping("/update/{taskId}")
-    Task updateTask(@RequestBody TaskRequest request, String taskId) {
-        return taskServices.updateTask(request, taskId));
+    Task updateTask(@RequestBody TaskRequest request, @PathVariable String taskId) {
+        return taskServices.updateTask(request, taskId);
     }
 
     @GetMapping("/get-list/{idUser}")
