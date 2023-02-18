@@ -1,17 +1,18 @@
 package com.mammadli.to_do_app.services;
 
-import com.mammadli.to_do_app.db.entity.Task;
+import com.mammadli.to_do_app.model.dto.TaskRequest;
+import com.mammadli.to_do_app.model.entity.Task;
 import com.mammadli.to_do_app.util.ResponseData;
 
 import java.util.List;
 
 public interface TaskServices {
 
-    ResponseData<Task> addTask(Task task);
+    Task addTask(TaskRequest request);
 
-    ResponseData<Task> updateTask(Task task);
+    Task updateTask(TaskRequest request,String taskId);
 
-    ResponseData<List<Task>> getAllTasks(String idUser);
+    List<Task> getAllTasks(String idUser);
 
-    ResponseData<String> deleteTask(String idUser, String id);
+    Void deleteTask(String idUser, String id);
 }
