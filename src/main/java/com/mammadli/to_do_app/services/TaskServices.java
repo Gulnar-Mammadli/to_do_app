@@ -2,7 +2,6 @@ package com.mammadli.to_do_app.services;
 
 import com.mammadli.to_do_app.model.dto.TaskRequest;
 import com.mammadli.to_do_app.model.entity.Task;
-import com.mammadli.to_do_app.util.ResponseData;
 
 import java.util.List;
 

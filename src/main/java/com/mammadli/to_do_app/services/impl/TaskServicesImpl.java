@@ -18,10 +18,6 @@ import java.util.List;
 public class TaskServicesImpl implements TaskServices {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
-    public static int SUCCESS_CODE = 200;
-    public static int NOT_FOUND_CODE = 404;
-    public static String SUCCESS_MESSAGE = "SUCCESS";
-    public static String NOT_FOUND_MESSAGE = "NOT_FOUND";
 
     @Override
     public Task addTask(TaskRequest request) {
