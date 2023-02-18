@@ -8,20 +8,20 @@ import com.mammadli.to_do_app.model.dto.UpdateRequest;
 import com.mammadli.to_do_app.model.entity.User;
 import com.mammadli.to_do_app.services.UserServices;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserServicesImpl implements UserServices {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User registerUser(RegistrationRequest request) {
 
         User user = UserMapper.INSTANCE.mapToUser(request);
-        user.setUsername(request.getUsername());
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(Role.ADMIN);
         return userRepository.save(user);
     }
@@ -31,7 +31,7 @@ public class UserServicesImpl implements UserServices {
         User response = userRepository.findByUsername(request.getUsername());
         if (response != null) {
             request.setRole(Role.USER);
-            request.setPassword(request.getPassword());
+            request.setPassword(passwordEncoder.encode(request.getPassword()));
             return userRepository.save(UserMapper.INSTANCE.mapToUser(request));
         }
         return null;
