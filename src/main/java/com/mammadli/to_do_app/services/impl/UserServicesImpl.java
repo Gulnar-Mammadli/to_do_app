@@ -55,7 +55,7 @@ public class UserServicesImpl implements UserServices {
 
     @Override
     public Void deleteUser(String idUser) {
-        User user = userRepository.findByIdUserAndDeletedIsFalse(idUser);
+        User user = userRepository.findByIdUser(idUser);
         if (user != null) {
             userRepository.deleteById(idUser);
             userRepository.save(user);
