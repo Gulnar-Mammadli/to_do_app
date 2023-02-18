@@ -1,37 +1,43 @@
 package com.mammadli.to_do_app.api;
 
-import com.mammadli.to_do_app.db.entity.User;
+import com.mammadli.to_do_app.model.dto.RegistrationRequest;
+import com.mammadli.to_do_app.model.dto.UpdateRequest;
+import com.mammadli.to_do_app.model.entity.User;
 import com.mammadli.to_do_app.services.UserServices;
-import com.mammadli.to_do_app.util.ResponseData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/users")
+@CrossOrigin("http://localhost:8081")
 public class UserController {
 
     private final UserServices userServices;
 
-    @PostMapping("/create")
-    ResponseEntity<ResponseData<User>> createUser(@RequestBody User user){
-        return ResponseEntity.ok(userServices.createUser(user));
+    @PostMapping("/register")
+    User registerUser(@RequestBody RegistrationRequest registrationRequest) {
+        return userServices.registerUser(registrationRequest);
     }
 
-    @PutMapping("/update")
-    ResponseEntity<ResponseData<User>> updateUser(@RequestBody User user){
-        return ResponseEntity.ok(userServices.updateUser(user));
+    @PostMapping("/create")
+    User createUser(@RequestBody RegistrationRequest request) {
+        return userServices.createUser(request);
+    }
+
+    @PutMapping("/update/{id}")
+    User updateUser(@RequestBody UpdateRequest request, @PathVariable String id) {
+        return userServices.updateUser(request, id);
     }
 
     @GetMapping("/get/{idUser}")
-    ResponseEntity<ResponseData<User>> getUser(@PathVariable String idUser){
-        return ResponseEntity.ok(userServices.getUser(idUser));
+    User getUser(@PathVariable String idUser) {
+        return userServices.getUser(idUser);
     }
 
     @DeleteMapping("/delete/{idUser}")
-    ResponseEntity<ResponseData<String>> deleteUser(@PathVariable String idUser){
-       return ResponseEntity.ok(userServices.deleteUser(idUser));
+    Void deleteUser(@PathVariable String idUser) {
+        return userServices.deleteUser(idUser);
     }
 
 }
