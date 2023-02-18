@@ -1,7 +1,8 @@
-package com.mammadli.to_do_app.db.entity;
+package com.mammadli.to_do_app.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mammadli.to_do_app.enums.TaskStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @NoArgsConstructor
@@ -22,16 +22,16 @@ import java.time.format.DateTimeFormatter;
 public class Task {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(
-            name = "uuid2",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column( nullable = false,columnDefinition = "VARCHAR(255)")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column( nullable = false)
     private String id;
 
+    @Column( name = "id_user", nullable = false)
+    @JsonProperty("id_user")
     private String idUser;
+
     private String title;
+
     private String description;
 
     @Enumerated(value = EnumType.STRING)
