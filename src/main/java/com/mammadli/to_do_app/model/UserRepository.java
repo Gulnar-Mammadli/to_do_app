@@ -1,6 +1,6 @@
-package com.mammadli.to_do_app.db;
+package com.mammadli.to_do_app.model;
 
-import com.mammadli.to_do_app.db.entity.User;
+import com.mammadli.to_do_app.model.entity.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +9,6 @@ public interface UserRepository extends CrudRepository<User,String> {
 
     User findByIdUser(String idUser);
     User findByIdUserAndDeletedIsFalse(String idUser);
+
+    User findByUsername(String username);
 }
