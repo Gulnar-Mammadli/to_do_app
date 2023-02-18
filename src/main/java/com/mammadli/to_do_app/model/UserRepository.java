@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends CrudRepository<User,String> {
 
     User findByIdUser(String idUser);
-    User findByIdUserAndDeletedIsFalse(String idUser);
-
     User findByUsername(String username);
 }
